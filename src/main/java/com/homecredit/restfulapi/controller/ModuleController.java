@@ -8,43 +8,28 @@ import org.springframework.web.bind.annotation.*;
 
 import com.homecredit.restfulapi.model.Modules;
 import com.homecredit.restfulapi.repository.ModuleRepository;
+import com.homecredit.restfulapi.service.ModuleService;
 
 @RestController
 @RequestMapping("/api")
 public class ModuleController {
 	
 	@Autowired
-	ModuleRepository moduleRepository;
+	ModuleService moduleService;
 	
 	@GetMapping("/module/{id}")
-	public List<Modules> getModuleByUserId(@PathVariable(value = "id") int userId){
-//		System.out.println("User ID ------> "+userId);
-//		return moduleRepository.findById(userId);
-		return moduleRepository.findAll();
+	public Iterable<Modules> getModuleByUserId(@PathVariable(value = "id") int userId){
+		return moduleService.getAllModules();
 	}
 	
 //	@GetMapping("/module/{id}")
-//    public ModuleRepository getModuleById(@PathVariable(value = "id") Long moduleId) {
-//        return moduleRepository.findById(moduleId).orElseThrow(() -> new Resource);
-//    }
-	
-//	@GetMapping("/{id}")
-//	public String getModuleById(@PathVariable(value = "id") int id){
-//		List<Modules> module = moduleRepository.findAllByIdUser(id);
-//		
-//		if (module==null)
-//			return "Failed!"; //ResponseEntity.notFound().build();
-//		
-//		return "Success!";//ResponseEntity.ok().body(module);
+//	public Iterable<Modules> getAllModules(){
+//		return moduleService.getAllModules();
 //	}
 	
 //	@GetMapping("/module/{id}")
-//	public ResponseEntity<Modules> getModuleByUserId(@PathVariable(value="id") Long userId){
-//		Modules module = moduleRepository.findById(userId);
-//		
-//		if(module == null)
-//			return ResponseEntity.notFound().build();
-//		
-//		return ResponseEntity.ok().body(module);
+//	public List<Modules> getModuleListById(@PathVariable Integer id_user) {
+//		return moduleService.getModuleListById(id_user);
 //	}
+	
 }
